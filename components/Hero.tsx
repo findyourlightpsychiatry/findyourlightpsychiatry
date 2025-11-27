@@ -39,6 +39,9 @@ const Hero = ({ title, subtitle, text, imageSrc, imageAlt, backgroundImage }: He
           {/* Enhanced bottom fade for smooth transition to next section */}
           <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/60 via-white/30 to-transparent"></div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/80 via-white/40 to-transparent"></div>
+          {/* Smooth top fade for elegant transition from top of page */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/80 via-white/50 via-white/20 to-transparent"></div>
+          <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/95 via-white/60 via-white/25 to-transparent"></div>
         </div>
       )}
       

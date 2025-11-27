@@ -28,9 +28,7 @@ const Navbar = () => {
     if (typeof window === 'undefined') return;
     
     const checkDesktop = () => {
-      if (typeof window !== 'undefined') {
-        setIsDesktop(window.innerWidth >= 1024);
-      }
+      setIsDesktop(window.innerWidth >= 1024);
     };
     
     // Set initial value

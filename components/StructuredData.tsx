@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { config } from "@/lib/config";
+import { logger } from "@/lib/logger";
 
 export default function StructuredData() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://findyourlightpsychiatry.com";
@@ -58,7 +59,7 @@ export default function StructuredData() {
 
   // Additional safety: validate that JSON stringification succeeded
   if (!organizationJson || !healthcareProviderJson) {
-    console.error('Failed to stringify structured data schemas');
+    logger.error('Failed to stringify structured data schemas');
     return null;
   }
 
