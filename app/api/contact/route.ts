@@ -65,37 +65,54 @@ export async function POST(request: NextRequest) {
     // In production, validate against allowed origins
     if (process.env.NODE_ENV === 'production') {
       const origin = request.headers.get("origin");
-      const allowedOrigin = process.env.NEXT_PUBLIC_BASE_URL || 'https://findyourlightpsychiatry.com';
+      const referer = request.headers.get("referer");
+      const allowedOrigin = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.findyourlightpsychiatry.org';
       
       // Extract hostname for comparison
       try {
-        const allowedHost = new URL(allowedOrigin).hostname;
-        const wwwAllowedHost = allowedHost.startsWith('www.') ? allowedHost : `www.${allowedHost}`;
+        const allowedUrl = new URL(allowedOrigin);
+        const allowedHost = allowedUrl.hostname;
+        const baseHost = allowedHost.replace(/^www\./, '');
+        const wwwHost = `www.${baseHost}`;
         
-        // Allow requests from same origin or allowed origin
+        // Check both origin and referer headers
+        let isAllowed = false;
+        
+        // Check origin header
         if (origin) {
           try {
-            const originHost = new URL(origin).hostname;
-            const isAllowed = originHost === allowedHost || 
-                            originHost === wwwAllowedHost ||
-                            originHost === allowedHost.replace('www.', '') ||
-                            originHost === wwwAllowedHost.replace('www.', '');
-            
-            if (!isAllowed) {
-              logger.warn("CSRF: Invalid origin", { origin, allowedOrigin });
-              return NextResponse.json(
-                { error: "Invalid request origin" },
-                { status: 403 }
-              );
-            }
+            const originUrl = new URL(origin);
+            const originHost = originUrl.hostname;
+            isAllowed = originHost === allowedHost || 
+                       originHost === baseHost ||
+                       originHost === wwwHost ||
+                       originHost === allowedHost.replace('www.', '');
           } catch {
-            // Invalid origin URL format - reject
-            logger.warn("CSRF: Invalid origin format", { origin });
-            return NextResponse.json(
-              { error: "Invalid request origin" },
-              { status: 403 }
-            );
+            // Invalid origin URL format - check referer instead
           }
+        }
+        
+        // If origin check didn't pass, check referer header
+        if (!isAllowed && referer) {
+          try {
+            const refererUrl = new URL(referer);
+            const refererHost = refererUrl.hostname;
+            isAllowed = refererHost === allowedHost || 
+                       refererHost === baseHost ||
+                       refererHost === wwwHost ||
+                       refererHost === allowedHost.replace('www.', '');
+          } catch {
+            // Invalid referer URL format
+          }
+        }
+        
+        // If neither origin nor referer match, reject the request
+        if (!isAllowed && (origin || referer)) {
+          logger.warn("CSRF: Invalid origin/referer", { origin, referer, allowedOrigin });
+          return NextResponse.json(
+            { error: "Invalid request origin" },
+            { status: 403 }
+          );
         }
       } catch {
         // Invalid allowedOrigin format - skip validation (shouldn't happen)
