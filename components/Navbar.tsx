@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
   const pathname = usePathname();
   const [currentPath, setCurrentPath] = useState("");
 
@@ -23,32 +22,6 @@ const Navbar = () => {
       prevPathnameRef.current = pathname;
     }
   }, [pathname]);
-
-  // Track window width for SSR safety
-  useEffect(() => {
-    // Check if window is available (client-side only)
-    if (typeof window === 'undefined') return;
-    
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    
-    // Set initial value
-    checkDesktop();
-    
-    // Update on resize with debouncing for performance
-    let timeoutId: NodeJS.Timeout;
-    const handleResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkDesktop, 150); // Debounce resize events
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -70,24 +43,18 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Hover-based dropdown handlers (desktop only)
+  // Hover-based dropdown handlers
   const handleMouseEnter = (item: string) => {
-    if (isDesktop) {
-      setActiveDropdown(item);
-    }
+    setActiveDropdown(item);
   };
 
   const handleMouseLeave = () => {
-    if (isDesktop) {
-      setActiveDropdown(null);
-    }
+    setActiveDropdown(null);
   };
 
   // Click-based dropdown handlers (mobile)
   const handleDropdownToggle = (item: string) => {
-    if (!isDesktop) {
-      setActiveDropdown(activeDropdown === item ? null : item);
-    }
+    setActiveDropdown(activeDropdown === item ? null : item);
   };
 
   // Check if a path is active
@@ -173,18 +140,63 @@ const Navbar = () => {
               </div>
             </li>
 
-            {/* Services */}
-            <li className="whitespace-nowrap">
-              <Link 
-                href="/services" 
-                className={`px-3 py-2 rounded transition-all duration-200 ${
-                  isActive("/services") 
-                    ? "bg-[#047857] text-white" 
-                    : "hover:bg-[#047857] hover:text-white"
+            {/* Services with dropdown */}
+            <li
+              className="relative whitespace-nowrap"
+              onMouseEnter={() => handleMouseEnter("services")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="flex items-center">
+                <Link
+                  href="/services"
+                  className={`px-3 py-2 rounded transition-all duration-200 ${
+                    isActive("/services")
+                      ? "bg-[#047857] text-white"
+                      : "hover:bg-[#047857] hover:text-white"
+                  }`}
+                >
+                  SERVICES
+                </Link>
+                <button
+                  onClick={() => handleDropdownToggle("services")}
+                  className="ml-1 p-1"
+                  aria-label="Toggle Services menu"
+                >
+                  <svg
+                    className={`w-3 h-3 transition-transform duration-200 ${
+                      activeDropdown === "services" ? "rotate-180" : ""
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                className={`absolute left-0 pt-1 w-60 z-50 ${
+                  activeDropdown === "services"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2 pointer-events-none lg:pointer-events-auto"
                 }`}
               >
-                SERVICES
-              </Link>
+                <div className="bg-[#059669] text-white rounded-md shadow-lg py-2 border border-white/30 transition-all duration-300">
+                  <ul>
+                    <li>
+                      <Link
+                        href="/spravato"
+                        className="block px-5 py-3 text-base hover:bg-white/10 transition-colors"
+                      >
+                        SPRAVATO® Treatment
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </li>
 
             {/* Insurance & Payments */}
@@ -418,8 +430,7 @@ const Navbar = () => {
 
             {/* About with dropdown */}
             <div>
-              <button
-                onClick={() => handleDropdownToggle("about")}
+              <div
                 className={`w-full flex items-center justify-between px-4 py-3 text-base font-medium rounded-md transition-colors ${
                   isActive("/about")
                     ? "bg-[#047857] text-white"
@@ -429,20 +440,27 @@ const Navbar = () => {
                 <Link href="/about" className="flex-1 text-left">
                   ABOUT
                 </Link>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    activeDropdown === "about" ? "rotate-180" : ""
-                  }`}
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                <button
+                  type="button"
+                  onClick={() => handleDropdownToggle("about")}
+                  className="ml-2 p-1 rounded hover:bg-white/10 focus-visible:outline focus-visible:outline-white/70"
+                  aria-label="Toggle About menu"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      activeDropdown === "about" ? "rotate-180" : ""
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
               {activeDropdown === "about" && (
                 <div className="pl-4 mt-1 space-y-1">
                   <Link
@@ -455,16 +473,50 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link
-              href="/services"
-              className={`block px-4 py-3 text-base font-medium rounded-md transition-colors ${
-                isActive("/services")
-                  ? "bg-[#047857] text-white"
-                  : "text-white hover:bg-[#047857]"
-              }`}
-            >
-              SERVICES
-            </Link>
+            {/* Services with dropdown */}
+            <div>
+              <div
+                className={`w-full flex items-center justify-between px-4 py-3 text-base font-medium rounded-md transition-colors ${
+                  isActive("/services")
+                    ? "bg-[#047857] text-white"
+                    : "text-white hover:bg-[#047857]"
+                }`}
+              >
+                <Link href="/services" className="flex-1 text-left">
+                  SERVICES
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => handleDropdownToggle("services")}
+                  className="ml-2 p-1 rounded hover:bg-white/10 focus-visible:outline focus-visible:outline-white/70"
+                  aria-label="Toggle Services menu"
+                >
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      activeDropdown === "services" ? "rotate-180" : ""
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              {activeDropdown === "services" && (
+                <div className="pl-4 mt-1 space-y-1">
+                  <Link
+                    href="/spravato"
+                    className="block px-4 py-2 text-sm text-white/90 hover:bg-white/10 rounded-md"
+                  >
+                    SPRAVATO® Treatment
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/insurance-payments"
@@ -479,8 +531,7 @@ const Navbar = () => {
 
             {/* Contact with dropdown */}
             <div>
-              <button
-                onClick={() => handleDropdownToggle("contact")}
+              <div
                 className={`w-full flex items-center justify-between px-4 py-3 text-base font-medium rounded-md transition-colors ${
                   isActive("/contact")
                     ? "bg-[#047857] text-white"
@@ -490,20 +541,27 @@ const Navbar = () => {
                 <Link href="/contact" className="flex-1 text-left">
                   CONTACT
                 </Link>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    activeDropdown === "contact" ? "rotate-180" : ""
-                  }`}
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                <button
+                  type="button"
+                  onClick={() => handleDropdownToggle("contact")}
+                  className="ml-2 p-1 rounded hover:bg-white/10 focus-visible:outline focus-visible:outline-white/70"
+                  aria-label="Toggle Contact menu"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      activeDropdown === "contact" ? "rotate-180" : ""
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
               {activeDropdown === "contact" && (
                 <div className="pl-4 mt-1 space-y-1">
                   <Link
