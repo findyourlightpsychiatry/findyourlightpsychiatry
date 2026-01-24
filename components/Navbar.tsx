@@ -9,10 +9,12 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const pathname = usePathname();
+  const [currentPath, setCurrentPath] = useState("");
 
   // Close mobile menu when route changes
   const prevPathnameRef = useRef(pathname);
   useEffect(() => {
+    setCurrentPath(pathname ?? "");
     if (prevPathnameRef.current !== pathname) {
       startTransition(() => {
         setMobileMenuOpen(false);
@@ -90,7 +92,7 @@ const Navbar = () => {
 
   // Check if a path is active
   const isActive = (path: string) => {
-    return pathname === path;
+    return currentPath === path;
   };
 
   return (
