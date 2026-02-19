@@ -15,7 +15,7 @@ export default function SpravatoHero() {
           <p className="text-sm uppercase tracking-[0.25em] text-emerald-700/80">
             SPRAVATO® Care
           </p>
-          <h1 className="mt-4 font-script text-4xl text-[#D4AF37] sm:text-5xl md:text-6xl">
+          <h1 className="mt-4 font-heading font-bold text-4xl text-[#D4AF37] sm:text-5xl md:text-6xl leading-tight">
             SPRAVATO® (Esketamine) Treatment at Find Your Light Psychiatry
           </h1>
           <p className="mt-6 text-base text-gray-800 sm:text-lg md:text-xl">

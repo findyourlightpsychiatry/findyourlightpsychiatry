@@ -4,8 +4,29 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Services - Find Your Light Psychiatry PLLC",
-  description: "Comprehensive psychiatric services including medication management, TMS therapy, psychotherapy, Qb testing for ADHD, child and adolescent care, and telehealth appointments throughout Washington State.",
-  keywords: ["psychiatric services", "medication management", "TMS therapy", "psychotherapy", "ADHD testing", "child psychiatry", "adolescent psychiatry", "telehealth", "Washington State"],
+  description: "Comprehensive psychiatric services including medication management, psychotherapy, Qb testing for ADHD, child and adolescent care, and telehealth appointments. Serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  keywords: ["psychiatric services", "medication management", "psychotherapy", "ADHD testing", "child psychiatry", "adolescent psychiatry", "telehealth", "Washington State", "psychiatrist Queen Anne", "psychiatrist Bellevue", "psychiatrist Seattle"],
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Our Services - Find Your Light Psychiatry PLLC",
+    description: "Comprehensive psychiatric services including medication management, psychotherapy, Qb testing for ADHD, child and adolescent care. Serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+    url: "/services",
+    images: [
+      {
+        url: "/images/services-picture.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Psychiatric Services at Find Your Light Psychiatry",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Services - Find Your Light Psychiatry PLLC",
+    description: "Comprehensive psychiatric services serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  },
 };
 
 export default function ServicesPage() {
@@ -33,7 +54,6 @@ export default function ServicesPage() {
               className="object-cover object-center"
               priority
               sizes="100vw"
-              quality={90}
               style={{ objectPosition: 'center center' }}
               aria-hidden="true"
             />
@@ -78,25 +98,6 @@ export default function ServicesPage() {
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed">
                   We integrate supportive, solution-focused, and trauma-informed approaches to help patients build coping skills and emotional awareness.
-                </p>
-              </Link>
-
-              {/* TMS Therapy */}
-              <Link
-                href="/contact"
-                className="block mb-4 sm:mb-5 md:mb-6 bg-white/88 backdrop-blur-md rounded-3xl p-5 sm:p-6 md:p-7 lg:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-white/80 hover:bg-white/95 hover:shadow-[0_12px_48px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out cursor-pointer group transform hover:-translate-y-0.5"
-              >
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif text-gray-900 font-semibold mb-3 sm:mb-4 group-hover:text-[#059669] transition-colors duration-300">
-                  TMS Therapy (Transcranial Magnetic Stimulation)
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed mb-3 sm:mb-4">
-                  TMS is an FDA-approved, non-invasive treatment for depression that uses gentle magnetic pulses to activate underactive brain regions involved in mood regulation.
-                </p>
-                <p className="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed mb-3 sm:mb-4">
-                  Ideal for individuals who have not achieved full relief from antidepressant medications, TMS offers a safe, medication-free option with lasting results.
-                </p>
-                <p className="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed">
-                  We partner with trusted regional TMS centers to make this treatment accessible to our patients.
                 </p>
               </Link>
 

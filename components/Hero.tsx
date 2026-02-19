@@ -28,7 +28,6 @@ const Hero = ({ title, subtitle, text, imageSrc, imageAlt, backgroundImage }: He
             className="object-cover object-center"
             priority
             sizes="100vw"
-            quality={90}
             aria-hidden="true"
           />
           {/* Reduced multi-layer gradient overlays for smoother, clearer blending */}

@@ -30,7 +30,7 @@ export default function SpravatoLocations() {
           </p>
           <h2
             id={headingId}
-            className="mt-3 font-serif text-3xl text-slate-900 sm:text-4xl md:text-5xl"
+            className="mt-3 font-heading font-bold text-3xl text-slate-900 sm:text-4xl md:text-5xl"
           >
             Our Locations
           </h2>
@@ -51,7 +51,7 @@ export default function SpravatoLocations() {
               >
                 <h3
                   id={cardId}
-                  className="font-serif text-2xl text-slate-900 sm:text-3xl"
+                  className="font-heading font-semibold text-2xl text-slate-900 sm:text-3xl"
                 >
                   {location.name}
                 </h3>

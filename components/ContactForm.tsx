@@ -155,9 +155,49 @@ export default function ContactForm() {
 
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-white/80">
-      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-gray-900 font-light mb-6 sm:mb-8 tracking-wide">
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading text-gray-900 font-semibold mb-6 sm:mb-8 tracking-wide">
         Request an Appointment
       </h2>
+
+      {/* Book Now Button - Direct Online Booking */}
+      <div className="mb-8 text-center">
+        <a
+          href="https://intakeq.com/booking/dcargy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 bg-[#D4AF37] text-white font-semibold rounded-2xl hover:bg-[#C4A030] transition-all duration-500 ease-out shadow-[0_4px_16px_rgba(212,175,55,0.35)] hover:shadow-[0_8px_24px_rgba(212,175,55,0.45)] transform hover:-translate-y-1 text-base sm:text-lg min-h-[52px]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+          Book Online Now
+        </a>
+        <p className="mt-3 text-sm text-gray-500">
+          Schedule directly through our secure patient portal
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="relative mb-8">
+        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+          <div className="w-full border-t border-gray-200" />
+        </div>
+        <div className="relative flex justify-center">
+          <span className="bg-white px-4 text-sm text-gray-500">or send us an inquiry</span>
+        </div>
+      </div>
 
       {/* Success Message */}
       {submitStatus === "success" && (

@@ -5,8 +5,29 @@ import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Contact Us - Find Your Light Psychiatry PLLC",
-  description: "Request an appointment with Find Your Light Psychiatry. Located in Seattle, Washington, serving patients throughout Washington State with psychiatric medication management, TMS therapy, psychotherapy, and telehealth services.",
-  keywords: ["psychiatry", "mental health", "appointment", "Seattle", "Washington", "telehealth", "psychiatric services"],
+  description: "Request an appointment with Find Your Light Psychiatry. Offices in Queen Anne Seattle and Bellevue, WA, serving patients throughout Washington State with psychiatric medication management, psychotherapy, SPRAVATO® treatment, and telehealth services.",
+  keywords: ["psychiatry", "mental health", "appointment", "Seattle", "Bellevue", "Queen Anne", "Washington", "telehealth", "psychiatric services", "psychiatrist Queen Anne", "psychiatrist Bellevue"],
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact Us - Find Your Light Psychiatry PLLC",
+    description: "Request an appointment with Find Your Light Psychiatry. Offices in Queen Anne Seattle and Bellevue, WA, serving patients throughout Washington State.",
+    url: "/contact",
+    images: [
+      {
+        url: "/images/contact-page-background.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Contact Find Your Light Psychiatry",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us - Find Your Light Psychiatry PLLC",
+    description: "Request an appointment with Find Your Light Psychiatry. Offices in Queen Anne Seattle and Bellevue, WA.",
+  },
 };
 
 export default function ContactPage() {
@@ -18,7 +39,7 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12">
             {/* Header Section - Centered, matching home page style */}
             <div className="text-center mb-8 sm:mb-10 md:mb-12">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-script text-[#D4AF37] mb-6 sm:mb-8 leading-[0.95] tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3),_0_0_8px_rgba(255,255,255,0.5)]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[#D4AF37] mb-6 sm:mb-8 leading-tight tracking-tight">
                 Contact Find Your Light Psychiatry
               </h1>
             </div>
@@ -36,7 +57,6 @@ export default function ContactPage() {
               className="object-cover"
               priority
               sizes="100vw"
-              quality={90}
               style={{ objectPosition: 'center 40%' }}
               aria-hidden="true"
             />
@@ -72,7 +92,7 @@ export default function ContactPage() {
                   </p>
                   
                   <p className="text-base sm:text-lg md:text-xl font-serif font-light text-gray-700 leading-relaxed">
-                    We offer services in psychiatric medication management, TMS therapy, psychotherapy, Qb testing for ADHD, child and adolescent care, and telehealth appointments throughout Washington State.
+                    We offer services in psychiatric medication management, psychotherapy, SPRAVATO® treatment, Qb testing for ADHD, child and adolescent care, and telehealth appointments throughout Washington State.
                   </p>
                 </div>
                 

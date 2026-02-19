@@ -5,7 +5,28 @@ import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Insurance & Payment Options - Find Your Light Psychiatry",
-  description: "Find Your Light Psychiatry accepts most major insurance plans including Aetna, Cigna, Kaiser Permanente, United Healthcare, Medicare, Medicaid, and more. Private pay options also available.",
+  description: "Find Your Light Psychiatry accepts most major insurance plans including Aetna, Cigna, Kaiser Permanente, United Healthcare, Medicare, Medicaid, and more. Private pay options also available. Serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  alternates: {
+    canonical: "/insurance-payments",
+  },
+  openGraph: {
+    title: "Insurance & Payment Options - Find Your Light Psychiatry",
+    description: "Find Your Light Psychiatry accepts most major insurance plans. Private pay options also available. Serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+    url: "/insurance-payments",
+    images: [
+      {
+        url: "/images/services-picture.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Insurance and Payment Options",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insurance & Payment Options - Find Your Light Psychiatry",
+    description: "Find Your Light Psychiatry accepts most major insurance plans. Serving Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  },
 };
 
 interface InsuranceProvider {
@@ -67,7 +88,6 @@ export default function InsurancePaymentsPage({
             className="object-cover object-center"
             priority
             sizes="100vw"
-            quality={90}
             aria-hidden="true"
           />
           {/* Subtle overlay for text readability */}

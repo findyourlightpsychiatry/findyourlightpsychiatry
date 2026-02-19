@@ -45,7 +45,7 @@ export default function SpravatoBenefits() {
           </p>
           <h2
             id={headingId}
-            className="mt-3 font-serif text-3xl text-slate-900 sm:text-4xl md:text-5xl"
+            className="mt-3 font-heading font-bold text-3xl text-slate-900 sm:text-4xl md:text-5xl"
           >
             Benefits Patients Frequently Experience
           </h2>

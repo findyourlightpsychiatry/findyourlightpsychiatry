@@ -8,12 +8,10 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const [currentPath, setCurrentPath] = useState("");
 
   // Close mobile menu when route changes
   const prevPathnameRef = useRef(pathname);
   useEffect(() => {
-    setCurrentPath(pathname ?? "");
     if (prevPathnameRef.current !== pathname) {
       startTransition(() => {
         setMobileMenuOpen(false);
@@ -43,7 +41,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Hover-based dropdown handlers
+  // Hover-based dropdown handlers (desktop only)
   const handleMouseEnter = (item: string) => {
     setActiveDropdown(item);
   };
@@ -52,14 +50,14 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
 
-  // Click-based dropdown handlers (mobile)
+  // Dropdown toggle handler
   const handleDropdownToggle = (item: string) => {
-    setActiveDropdown(activeDropdown === item ? null : item);
+    setActiveDropdown((prev) => (prev === item ? null : item));
   };
 
   // Check if a path is active
   const isActive = (path: string) => {
-    return currentPath === path;
+    return pathname === path;
   };
 
   return (
@@ -140,63 +138,32 @@ const Navbar = () => {
               </div>
             </li>
 
-            {/* Services with dropdown */}
-            <li
-              className="relative whitespace-nowrap"
-              onMouseEnter={() => handleMouseEnter("services")}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="flex items-center">
-                <Link
-                  href="/services"
-                  className={`px-3 py-2 rounded transition-all duration-200 ${
-                    isActive("/services")
-                      ? "bg-[#047857] text-white"
-                      : "hover:bg-[#047857] hover:text-white"
-                  }`}
-                >
-                  SERVICES
-                </Link>
-                <button
-                  onClick={() => handleDropdownToggle("services")}
-                  className="ml-1 p-1"
-                  aria-label="Toggle Services menu"
-                >
-                  <svg
-                    className={`w-3 h-3 transition-transform duration-200 ${
-                      activeDropdown === "services" ? "rotate-180" : ""
-                    }`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div
-                className={`absolute left-0 pt-1 w-60 z-50 ${
-                  activeDropdown === "services"
-                    ? "opacity-100 visible translate-y-0"
-                    : "opacity-0 invisible -translate-y-2 pointer-events-none lg:pointer-events-auto"
+            {/* Services */}
+            <li className="whitespace-nowrap">
+              <Link
+                href="/services"
+                className={`px-3 py-2 rounded transition-all duration-200 ${
+                  isActive("/services")
+                    ? "bg-[#047857] text-white"
+                    : "hover:bg-[#047857] hover:text-white"
                 }`}
               >
-                <div className="bg-[#059669] text-white rounded-md shadow-lg py-2 border border-white/30 transition-all duration-300">
-                  <ul>
-                    <li>
-                      <Link
-                        href="/spravato"
-                        className="block px-5 py-3 text-base hover:bg-white/10 transition-colors"
-                      >
-                        SPRAVATO® Treatment
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                SERVICES
+              </Link>
+            </li>
+
+            {/* Spravato */}
+            <li className="whitespace-nowrap">
+              <Link
+                href="/spravato"
+                className={`px-3 py-2 rounded transition-all duration-200 ${
+                  isActive("/spravato")
+                    ? "bg-[#047857] text-white"
+                    : "hover:bg-[#047857] hover:text-white"
+                }`}
+              >
+                {"SPRAVATO\u00AE"}
+              </Link>
             </li>
 
             {/* Insurance & Payments */}
@@ -209,7 +176,7 @@ const Navbar = () => {
                     : "hover:bg-[#047857] hover:text-white"
                 }`}
               >
-                INSURANCE &amp; PAYMENTS
+                {"INSURANCE & PAYMENTS"}
               </Link>
             </li>
 
@@ -302,44 +269,47 @@ const Navbar = () => {
           </ul>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-white hover:bg-[#047857] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#059669]"
-            aria-label="Toggle mobile menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="flex items-center lg:hidden space-x-3">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-md text-white hover:bg-[#047857] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#059669]"
+              aria-label="Toggle mobile menu"
+              aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-
-          {/* Desktop Right side: Search and Social Icons */}
-          <div className="hidden lg:flex items-center space-x-5 xl:space-x-6 ml-8 xl:ml-16">
-            {/* Search Icon */}
-            <button className="hover:text-gray-300 transition-colors p-2" aria-label="Search">
-              <svg className="w-5 h-5 xl:w-6 xl:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {mobileMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
+            <div className="flex items-center space-x-3">
+              <Link
+                href="/about"
+                className="px-4 py-2 text-sm font-semibold rounded-full border border-white/40 text-white hover:bg-[#047857] transition"
+              >
+                ABOUT
+              </Link>
+              <Link
+                href="/contact"
+                className="px-4 py-2 text-sm font-semibold rounded-full border border-white/40 text-white hover:bg-[#047857] transition"
+              >
+                CONTACT
+              </Link>
+            </div>
+          </div>
 
-            {/* Social Media Icons */}
+          {/* Desktop Right side: Social Icons */}
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 ml-8 xl:ml-16">
             <div className="flex items-center space-x-3 xl:space-x-4">
               {/* Facebook */}
               <a
@@ -473,50 +443,29 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Services with dropdown */}
-            <div>
-              <div
-                className={`w-full flex items-center justify-between px-4 py-3 text-base font-medium rounded-md transition-colors ${
-                  isActive("/services")
-                    ? "bg-[#047857] text-white"
-                    : "text-white hover:bg-[#047857]"
-                }`}
-              >
-                <Link href="/services" className="flex-1 text-left">
-                  SERVICES
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle("services")}
-                  className="ml-2 p-1 rounded hover:bg-white/10 focus-visible:outline focus-visible:outline-white/70"
-                  aria-label="Toggle Services menu"
-                >
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      activeDropdown === "services" ? "rotate-180" : ""
-                    }`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-              {activeDropdown === "services" && (
-                <div className="pl-4 mt-1 space-y-1">
-                  <Link
-                    href="/spravato"
-                    className="block px-4 py-2 text-sm text-white/90 hover:bg-white/10 rounded-md"
-                  >
-                    SPRAVATO® Treatment
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* Services */}
+            <Link
+              href="/services"
+              className={`block px-4 py-3 text-base font-medium rounded-md transition-colors ${
+                isActive("/services")
+                  ? "bg-[#047857] text-white"
+                  : "text-white hover:bg-[#047857]"
+              }`}
+            >
+              SERVICES
+            </Link>
+
+            {/* Spravato */}
+            <Link
+              href="/spravato"
+              className={`block px-4 py-3 text-base font-medium rounded-md transition-colors ${
+                isActive("/spravato")
+                  ? "bg-[#047857] text-white"
+                  : "text-white hover:bg-[#047857]"
+              }`}
+            >
+              {"SPRAVATO\u00AE"}
+            </Link>
 
             <Link
               href="/insurance-payments"
@@ -526,7 +475,7 @@ const Navbar = () => {
                   : "text-white hover:bg-[#047857]"
               }`}
             >
-              INSURANCE &amp; PAYMENTS
+              {"INSURANCE & PAYMENTS"}
             </Link>
 
             {/* Contact with dropdown */}
@@ -596,19 +545,9 @@ const Navbar = () => {
               BLOG
             </Link>
 
-            {/* Mobile Search and Social Icons */}
+            {/* Mobile Social Icons */}
             <div className="pt-4 border-t border-white/20 mt-4">
               <div className="flex items-center justify-center space-x-6 px-4">
-                <button className="text-white hover:text-gray-300 transition-colors p-2" aria-label="Search">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </button>
                 <a href="https://www.facebook.com/findyourlightpsychiatry" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors p-2" aria-label="Facebook">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

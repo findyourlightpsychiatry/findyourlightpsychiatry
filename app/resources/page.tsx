@@ -5,6 +5,19 @@ import { CRISIS_RESOURCES, EDUCATION_RESOURCES, SELFCARE_RESOURCES, type Resourc
 export const metadata: Metadata = {
   title: "Mental Health Resources - Find Your Light Psychiatry",
   description: "Access crisis hotlines, trusted mental health education resources, and self-care tools to support your mental wellness journey.",
+  alternates: {
+    canonical: "/resources",
+  },
+  openGraph: {
+    title: "Mental Health Resources - Find Your Light Psychiatry",
+    description: "Access crisis hotlines, trusted mental health education resources, and self-care tools to support your mental wellness journey.",
+    url: "/resources",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mental Health Resources - Find Your Light Psychiatry",
+    description: "Access crisis hotlines, trusted mental health education resources, and self-care tools.",
+  },
 };
 
 const ArrowRightIcon = ({ className }: { className?: string }) => (

@@ -24,7 +24,7 @@ export default function SpravatoInsurance() {
             </p>
             <h2
               id={headingId}
-              className="mt-3 font-serif text-3xl text-slate-900 sm:text-4xl"
+              className="mt-3 font-heading font-bold text-3xl text-slate-900 sm:text-4xl"
             >
               Insurance Coverage
             </h2>

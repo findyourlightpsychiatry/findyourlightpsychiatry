@@ -4,7 +4,28 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Find Your Light Psychiatry PLLC - Home",
-  description: "Compassionate, evidence-based mental health care for adults, children, and adolescents throughout Washington State. Led by April Casselman, PMHNP-BC.",
+  description: "Compassionate, evidence-based mental health care for adults, children, and adolescents in Queen Anne Seattle, Bellevue, and throughout Washington State. Led by April Casselman, PMHNP-BC.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Find Your Light Psychiatry PLLC - Mental Health Care in Queen Anne & Bellevue",
+    description: "Compassionate, evidence-based mental health care for adults, children, and adolescents in Queen Anne Seattle, Bellevue, and throughout Washington State.",
+    url: "/",
+    images: [
+      {
+        url: "/images/April-Casselman_Portrait.jpeg",
+        width: 1200,
+        height: 1600,
+        alt: "April Casselman, PMHNP-BC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Find Your Light Psychiatry PLLC - Mental Health Care in Queen Anne & Bellevue",
+    description: "Compassionate, evidence-based mental health care for adults, children, and adolescents in Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  },
 };
 
 export default function HomePage() {
@@ -84,11 +105,6 @@ Our mission is to help you restore balance, peace, and purpose through compassio
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 transform hover:scale-110 transition-transform duration-500">🧠</div>
               <h3 className="text-lg sm:text-xl font-serif font-semibold mb-3 sm:mb-4 text-gray-900">Medication Management</h3>
               <p className="text-gray-600 leading-relaxed text-sm sm:text-base">Comprehensive psychiatric medication evaluation and ongoing management.</p>
-            </Link>
-            <Link href="/services" className="text-center p-6 sm:p-8 md:p-10 bg-gradient-to-br from-white via-gray-50/50 to-emerald-50/20 rounded-3xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out border border-white/60 hover:border-emerald-200/60 transform hover:-translate-y-2 backdrop-blur-sm cursor-pointer block min-h-[220px] sm:min-h-[240px] flex flex-col justify-center">
-              <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 transform hover:scale-110 transition-transform duration-500">🌱</div>
-              <h3 className="text-lg sm:text-xl font-serif font-semibold mb-3 sm:mb-4 text-gray-900">TMS Therapy</h3>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">Transcranial Magnetic Stimulation for treatment-resistant depression.</p>
             </Link>
             <Link href="/services" className="text-center p-6 sm:p-8 md:p-10 bg-gradient-to-br from-white via-gray-50/50 to-emerald-50/20 rounded-3xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out border border-white/60 hover:border-emerald-200/60 transform hover:-translate-y-2 backdrop-blur-sm cursor-pointer block min-h-[220px] sm:min-h-[240px] flex flex-col justify-center">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 transform hover:scale-110 transition-transform duration-500">💬</div>

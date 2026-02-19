@@ -16,7 +16,7 @@ export default function SpravatoOverview() {
           </p>
           <h2
             id={headingId}
-            className="mt-3 font-serif text-3xl text-slate-900 sm:text-4xl md:text-5xl"
+            className="mt-3 font-heading font-bold text-3xl text-slate-900 sm:text-4xl md:text-5xl"
           >
             What Is SPRAVATO®?
           </h2>
@@ -51,7 +51,7 @@ export default function SpravatoOverview() {
               >
               <h3
                   id={cardId}
-                  className="font-serif text-2xl text-[#059669] sm:text-2xl"
+                  className="font-heading font-semibold text-2xl text-[#059669] sm:text-2xl"
                 >
                   {item.title}
                 </h3>

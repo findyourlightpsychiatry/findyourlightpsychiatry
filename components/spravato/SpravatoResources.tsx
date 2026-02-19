@@ -6,7 +6,7 @@ export default function SpravatoResources() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <p className="text-sm uppercase tracking-[0.2em] text-[#059669] mb-3">Resources</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-900 font-light leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-gray-900 font-bold leading-tight">
             Spravato Patient Information
           </h2>
           <p className="text-base sm:text-lg text-gray-700 mt-4">

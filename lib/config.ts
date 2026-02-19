@@ -4,9 +4,9 @@
  */
 
 export const config = {
-  phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "(206) 555-1234",
-  phoneLink: process.env.NEXT_PUBLIC_PHONE_LINK || "tel:+12065551234",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@findyourlightpsychiatry.com",
+  phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "(425) 780-7460",
+  phoneLink: process.env.NEXT_PUBLIC_PHONE_LINK || "tel:+14257807460",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@findyourlightpsychiatry.org",
   location: process.env.NEXT_PUBLIC_LOCATION || "Seattle, Washington",
   businessName: "Find Your Light Psychiatry PLLC",
   businessType: "Psychiatric Practice",
@@ -15,7 +15,7 @@ export const config = {
     initialEvaluation: process.env.NEXT_PUBLIC_PRICE_INITIAL || "$325",
     followUpVisit: process.env.NEXT_PUBLIC_PRICE_FOLLOWUP || "$175",
   },
-  // Copyright year (auto-updated)
-  copyrightYear: new Date().getFullYear(),
+  // Copyright year
+  copyrightYear: 2026,
 } as const;
 

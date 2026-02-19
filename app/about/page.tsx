@@ -4,8 +4,29 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About April Casselman - Find Your Light Psychiatry PLLC",
-  description: "Learn about April Casselman, PMHNP-BC, and Find Your Light Psychiatry. Providing compassionate, evidence-based mental health care for adults, children, and adolescents throughout Washington State.",
-  keywords: ["April Casselman", "PMHNP-BC", "psychiatric nurse practitioner", "mental health provider", "Washington State psychiatry"],
+  description: "Learn about April Casselman, PMHNP-BC, and Find Your Light Psychiatry. Providing compassionate, evidence-based mental health care for adults, children, and adolescents in Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  keywords: ["April Casselman", "PMHNP-BC", "psychiatric nurse practitioner", "mental health provider", "Washington State psychiatry", "psychiatrist Queen Anne", "psychiatrist Bellevue", "psychiatrist Seattle"],
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About April Casselman - Find Your Light Psychiatry PLLC",
+    description: "Learn about April Casselman, PMHNP-BC, and Find Your Light Psychiatry. Providing compassionate, evidence-based mental health care in Queen Anne Seattle, Bellevue, and throughout Washington State.",
+    url: "/about",
+    images: [
+      {
+        url: "/images/April-Casselman_Portrait.jpeg",
+        width: 1200,
+        height: 1600,
+        alt: "April Casselman, PMHNP-BC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About April Casselman - Find Your Light Psychiatry PLLC",
+    description: "Learn about April Casselman, PMHNP-BC, and Find Your Light Psychiatry. Providing compassionate, evidence-based mental health care in Queen Anne Seattle, Bellevue, and throughout Washington State.",
+  },
 };
 
 export default function AboutPage() {
@@ -48,7 +69,6 @@ export default function AboutPage() {
               className="object-cover object-center"
               priority
               sizes="100vw"
-              quality={90}
               style={{ objectPosition: 'center center' }}
               aria-hidden="true"
             />

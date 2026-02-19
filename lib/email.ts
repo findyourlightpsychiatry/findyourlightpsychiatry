@@ -154,7 +154,7 @@ function formatConfirmationEmail(data: ContactFormData): string {
             
             <p>At Find Your Light Psychiatry, we believe that healing begins with understanding. Led by April Casselman, PMHNP-BC, our practice provides personalized, evidence-based mental health care designed to help you restore balance, peace, and purpose through compassionate connection and research-driven treatment.</p>
             
-            <p>We offer comprehensive psychiatric services including medication management, TMS therapy, psychotherapy, Qb testing for ADHD, and specialized care for children and adolescents. Our services are available both in-person in Seattle and Bellevue, and via telehealth throughout Washington State.</p>
+            <p>We offer comprehensive psychiatric services including medication management, psychotherapy, SPRAVATO® treatment, Qb testing for ADHD, and specialized care for children and adolescents. Our services are available both in-person in Seattle and Bellevue, and via telehealth throughout Washington State.</p>
             
             <div class="urgent-notice">
               <strong>⚠️ Important Notice</strong>

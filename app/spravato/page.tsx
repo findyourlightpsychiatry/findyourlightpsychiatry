@@ -74,6 +74,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SPRAVATO® (esketamine) Treatment — Find Your Light Psychiatry",
+    description: "Breakthrough SPRAVATO® therapy for adults with treatment-resistant depression. Available in Bellevue & Seattle.",
+  },
 };
 
 export default function SpravatoRoutePage() {

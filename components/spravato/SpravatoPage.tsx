@@ -15,7 +15,7 @@ import SpravatoFAQ from "./SpravatoFAQ";
  */
 export default function SpravatoPage() {
   return (
-    <section className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       <SpravatoHero />
       <SpravatoOverview />
       <SpravatoHowItWorks />
@@ -27,7 +27,7 @@ export default function SpravatoPage() {
       <SpravatoFAQ />
       <SpravatoResources />
       <SpravatoCTA />
-    </section>
+    </main>
   );
 }
 
